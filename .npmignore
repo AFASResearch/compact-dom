@@ -1,0 +1,6 @@
+.*
+build
+test
+gulp
+gulpfile.js
+tsd.json
