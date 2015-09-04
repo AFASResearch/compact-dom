@@ -16,7 +16,7 @@ class StreamConverter extends Transform {
 
   _transform(chunk: string|Buffer, encoding: string, done: Function) {
     if (chunk === null) {
-      this.push(new Buffer(this.converter.convertLine(this.lastLine), encoding));
+      this.push(this.converter.convertLine(this.lastLine));
       this.push(null);
     } else {
       while (true) {
@@ -26,7 +26,7 @@ class StreamConverter extends Transform {
           this.lastLine = this.lastLine + chunkString;
           break;
         }
-        this.push(new Buffer(this.converter.convertLine(this.lastLine + chunkString.substr(0, index+1)), encoding));
+        this.push(this.converter.convertLine(this.lastLine + chunkString.substr(0, index+1)));
         chunk = chunkString.substr(index + 1);
         this.lastLine = "";
       }
