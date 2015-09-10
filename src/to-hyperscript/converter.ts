@@ -7,7 +7,8 @@ interface Converter {
 
 let createConverter = (options:Options) : Converter => {
   
-  const regex = new RegExp("\\b" + (options.mithril?"m":"h") + "((\\.[a-z]\\w*)+)\\(\\s*\\)?", "g");
+  var prefix = (options.prefix || "h");
+  const regex = new RegExp("\\b" + prefix + "((\\.[a-z]\\w*)+)\\(\\s*\\)?", "g");
   
   const camelCase = new RegExp("([a-z])([A-Z])", "g");
   
@@ -16,12 +17,15 @@ let createConverter = (options:Options) : Converter => {
   }
   
   let dasherize = (s: string) => {
+    if (options.dasherize === false) {
+      return s;
+    }
     return s.replace(camelCase, convertToDash);
   }
   
   let convertMatch = (match:string, group1: string) => {
     var addComma = match[match.length-1] !== ")";
-    return "h(\"" + dasherize(group1.substr(1)) + "\"" + (addComma ? ", " : ")");
+    return prefix + "(\"" + dasherize(group1.substr(1)) + "\"" + (addComma ? ", " : ")");
   }
   
   let convertLine = (line: string) => {
