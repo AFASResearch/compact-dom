@@ -1,17 +1,17 @@
-///<reference path="../../src/typings/chai/chai.d.ts" />
-///<reference path="../../src/typings/mocha/mocha.d.ts" />
+///<reference path="../../typings/chai/chai.d.ts" />
+///<reference path="../../typings/mocha/mocha.d.ts" />
 
 import chai = require("chai");
 import {Readable} from "stream";
 
-import * as createConverter from "../../src/to-hyperscript/stream-converter";
+import * as compactDom from "../../src/index";
 
 let expect = chai.expect;
 
 describe("createConverter", () => {
 
   it("should replace the simpelest case", (done: Function) => {
-    var converter = createConverter({});
+    var converter = compactDom.toHyperscript.createStreamConverter({});
     
     var rs = new Readable();
     rs.push("h.div()");

@@ -1,4 +1,4 @@
-///<reference path="../src/typings/node/node.d.ts"/>
+///<reference path="../typings/node/node.d.ts"/>
 
 import * as fs from "fs";
 

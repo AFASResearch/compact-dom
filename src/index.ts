@@ -1,11 +1,13 @@
-import {createConverter} from "./to-hyperscript/converter";
-import * as createStreamConverter from "./to-hyperscript/stream-converter";
+///<reference path="../typings/node/node.d.ts" />
 
-var compactDom = {
-  toHyperscript: {
-    createConverter, 
-    createStreamConverter
-  }
-}
+import {createConverter, Converter} from "./to-hyperscript/converter";
+import {createStreamConverter} from "./to-hyperscript/stream-converter";
+import {Options} from "./to-hyperscript/Options";
+import {Transform} from "stream";
 
-export = compactDom;
+let toHyperscript = {
+  createConverter, 
+  createStreamConverter
+};
+
+export { Options, Converter, toHyperscript };

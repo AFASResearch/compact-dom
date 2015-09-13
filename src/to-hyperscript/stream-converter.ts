@@ -1,6 +1,6 @@
-///<reference path="../typings/node/node.d.ts" />
+///<reference path="../../typings/node/node.d.ts" />
 
-import {createConverter, Converter} from "./converter";
+import {Converter, createConverter} from "./converter";
 import {Options} from "./options";
 import {Transform} from "stream";
 
@@ -41,8 +41,8 @@ class StreamConverter extends Transform {
   }
 };
 
-let createStreamConverter = function(options: Options) {
+let createStreamConverter = function(options: Options): Transform {
   return new StreamConverter(createConverter(options));
 };
 
-export = createStreamConverter;
+export {createStreamConverter};

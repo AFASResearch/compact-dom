@@ -1,12 +1,5 @@
-# Coverage directory used by tools like istanbul
-coverage
-
-# node-waf configuration
-.lock-wscript
-
 build
 dist
-
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+lib
 node_modules
+.vscode

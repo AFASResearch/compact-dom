@@ -4,7 +4,8 @@
     "noImplicitAny": true,
     "removeComments": false,
     "preserveConstEnums": true,
-    "outDir": "../build/js/src",
+    "declaration": true,
+    "outDir": "build/js",
     "sourceMap": true
   }
 }

@@ -1,11 +1,11 @@
 import {Options} from "./options";
 
-interface Converter {
+export interface Converter {
   convertLine: (line:string) => string;
   convert: (script:string) => string;
 }
 
-let createConverter = (options:Options) : Converter => {
+export function createConverter(options:Options) : Converter {
   
   var prefix = (options.prefix || "h");
   const regex = new RegExp("\\b" + prefix + "((\\.[a-z]\\w*)+)\\(\\s*\\)?", "g");
@@ -38,5 +38,5 @@ let createConverter = (options:Options) : Converter => {
   
   return {convert, convertLine};
 };
-
-export {createConverter, Converter};
+  
+//export {CompactDomToHyperscript};
