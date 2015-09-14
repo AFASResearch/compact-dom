@@ -11,7 +11,7 @@ configTypescript.typescript = require("typescript");
 var tsProject = ts.createProject(configTypescript);
 
 gulp.task("build", function() {
-  return gulp.src(["src/**/*.ts", "test/**/*.ts"])
+  return gulp.src(["src/**/*.ts", "test/**/*.ts", "typings/**/*.d.ts"])
     .pipe(ts(tsProject))
     .pipe(gulp.dest("build/js"));
 });

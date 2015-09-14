@@ -1,5 +1,3 @@
-///<reference path="../../typings/node/node.d.ts" />
-
 import {Converter, createConverter} from "./converter";
 import {Options} from "./options";
 import {Transform} from "stream";
