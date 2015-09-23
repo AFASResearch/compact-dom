@@ -1,4 +1,5 @@
-import {Options} from "./options";
+import {Options} from "../options";
+import {createRegExp} from "../regexp";
 
 export interface Converter {
   convertLine: (line:string) => string;
@@ -8,7 +9,7 @@ export interface Converter {
 export function createConverter(options:Options) : Converter {
   
   var prefix = (options.prefix || "h");
-  const regex = new RegExp("\\b" + prefix + "((\\.[a-z]\\w*)+)\\(\\s*\\)?", "g");
+  const regex = createRegExp(options);
   
   const camelCase = new RegExp("([a-z])([A-Z])", "g");
   

@@ -1,5 +1,5 @@
 import {Converter, createConverter} from "./converter";
-import {Options} from "./options";
+import {Options} from "../options";
 import {Transform} from "stream";
 
 class StreamConverter extends Transform {

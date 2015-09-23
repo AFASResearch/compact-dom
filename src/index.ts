@@ -1,6 +1,7 @@
 import {createConverter, Converter} from "./to-hyperscript/converter";
 import {createStreamConverter} from "./to-hyperscript/stream-converter";
-import {Options} from "./to-hyperscript/Options";
+import {Options} from "./options";
+import {createRegExp} from "./regexp";
 import {Transform} from "stream";
 
 let toHyperscript = {
@@ -8,4 +9,4 @@ let toHyperscript = {
   createStreamConverter
 };
 
-export { Options, Converter, toHyperscript };
+export { Options, Converter, createRegExp, toHyperscript };
