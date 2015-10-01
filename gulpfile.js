@@ -8,6 +8,11 @@ var tslint = require("gulp-tslint");
 var sourcemaps = require("gulp-sourcemaps");
 var path = require("path");
 
+var git = require('gulp-git');
+var bump = require('gulp-bump');
+var filter = require('gulp-filter');
+var tag_version = require('gulp-tag-version');
+
 var configTypescript = require("./tsconfig.json").compilerOptions;
 configTypescript.typescript = require("typescript");
 var tsProject = ts.createProject(configTypescript);
@@ -37,7 +42,7 @@ gulp.task("release:browser", ["build"], function () {
     .pipe(gulp.dest("lib/browser"));
 });
 
-gulp.task("test", ["build", "release"], function () { // Release here somehow circumvents clash between mocha and browserify when running the all task 
+gulp.task("test", ["build", "release"], function () { // Release here somehow circumvents clash between mocha and browserify when running the all task
   return gulp
     .src("build/js/test/**/*.js")
     .pipe(mocha({
@@ -70,3 +75,26 @@ gulp.task("release", ["build", "release:browser"], function(){
 gulp.task("all", ["build", "test", "release"]);
 
 gulp.task("default", ["build"]);
+
+
+
+
+function inc(importance) {
+  // get all the files to bump version in
+  return gulp.src(['./package.json', './bower.json'])
+    // bump the version number in those files
+    .pipe(bump({ type: importance }))
+    // save it back to filesystem
+    .pipe(gulp.dest('./'))
+    // commit the changed version number
+    .pipe(git.commit('bumps package version'))
+    // read only one file to get the version number
+    .pipe(filter('package.json'))
+    // **tag it in the repository**
+    .pipe(tag_version());
+}
+
+// these tasks are called from scripts/release.js
+gulp.task('bump-patch', ["release"], function () { return inc('patch'); });
+gulp.task('bump-minor', ["release"], function () { return inc('minor'); });
+gulp.task('bump-major', ["release"], function () { return inc('major'); });
